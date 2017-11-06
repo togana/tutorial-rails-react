@@ -1,0 +1,8 @@
+{
+  "apps" : [{
+    "name": "hypernova",
+    "script": "./node/hypernova.js",
+    "watch": "app/javascript",
+    "interpreter": "./node_modules/.bin/babel-node"
+  }]
+}
