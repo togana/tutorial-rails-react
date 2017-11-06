@@ -1,9 +1,24 @@
 import React, { Component } from 'react';
 
 export default class Table extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      filterText: '',
+    };
+  }
+
+  setFilter(filterText){
+    this.setState({ filterText: filterText.target.value.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&') });
+  }
+
   render() {
     return (
       <div>
+        <div>
+          <lbabel>検索</lbabel>
+          <input type='text' onChange={(text) => this.setFilter(text)} />
+        </div>
         <table>
           <thead>
             <tr>
@@ -13,7 +28,7 @@ export default class Table extends Component {
             </tr>
           </thead>
           <tbody>
-            {this.props.boards.map((board) => (
+            {this.props.boards.filter(board => board.title.match(new RegExp(this.state.filterText))).map((board) => (
               <tr key={board.id}>
                 <td>{board.title}</td>
                 <td>{board.message}</td>
